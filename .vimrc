@@ -36,7 +36,7 @@ func SetComment()
     call append(1, '')
     call append(2, '//================================================')
     call append(3, '//')
-    call append(4, '//      Filename: '.expand("%"))
+    call append(4, '//      Filename: '.RemoveDirName(expand("%")))
     call append(5, '//')
     call append(6, '//        Author: sphc - jinkai0916@outlook.com')
     call append(7, '//   Description: ---')
@@ -93,6 +93,21 @@ func SplitName(name)
             let str = join([str, "_"], "")
         endif
         let str = join([str, a:name[i]], "")
+        let i += 1
+    endwhile       
+    return str
+endfunc
+
+" function RemoveDirName
+func RemoveDirName(name)
+    let str = ""
+    let i = 0
+    while i < len(a:name)
+        if "/" == a:name[i]
+            let str = ""
+        else
+            let str = join([str, a:name[i]], "")
+        endif
         let i += 1
     endwhile       
     return str
